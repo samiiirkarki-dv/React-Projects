@@ -3,8 +3,21 @@ import styles from "./ContactForm.module.css";
 import { MdMessage } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
+import { useState } from "react";
 
 const ContactForm = () => {
+  const [name, setName] = useState("Samir");
+  const [email, setEmail] = useState("Samir@gmail.com");
+  const [text, setText] = useState("This is a react project");
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    setName(event.target[0].value);
+    setEmail(event.target[1].value);
+    setText(event.target[2].value);
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.contact_form}>
@@ -21,7 +34,7 @@ const ContactForm = () => {
           icon={<HiMail fontSize="24px" />}
         />
 
-        <form>
+        <form onSubmit={onSubmit}>
           <div className={styles.form_container}>
             <label htmlFor="name">Name</label>
             <input type="text" name="name" />
@@ -34,15 +47,17 @@ const ContactForm = () => {
             <label htmlFor="text">Text</label>
             <textarea name="text" rows="6" />
           </div>
-         <div 
-         style={{
-          display:"flex",
-          justifyContent:"end",
-          marginTop: "-10px"
-         }}
-         >
-           <Button text="SUBMIT"></Button>
-         </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              marginTop: "-10px",
+            }}
+          >
+            <Button text="SUBMIT"></Button>
+          </div>
+
+          <div>{name + " " + email + " " + text + " "}</div>
         </form>
       </div>
       <div className={styles.contact_image}>
